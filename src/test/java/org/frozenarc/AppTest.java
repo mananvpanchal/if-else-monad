@@ -20,7 +20,16 @@ public class AppTest
         Assert.assertTrue(If.of("Ho, ", str -> str.equals("Ho"))
                 .thn(str -> If.of(str, str2 -> str2.equals(""))
                         .thn(str2 -> str2 + "He")
-                        .els(str2 -> str2 + "Hu").done())
+                        .els(str2 -> str2 + "Hu")
+                        .done())
+                .els(str -> str + "hi")
+                .done().equals("Ho, hi"));
+
+        Assert.assertTrue(If.of("Ho, ", str -> str.equals("Ho"))
+                .thn(If.<String>of(str2 -> str2.equals(""))
+                        .thn(str2 -> str2 + "He")
+                        .els(str2 -> str2 + "Hu")
+                        .delay())
                 .els(str -> str + "hi")
                 .done().equals("Ho, hi"));
 

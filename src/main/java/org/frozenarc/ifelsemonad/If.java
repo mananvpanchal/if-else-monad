@@ -26,6 +26,10 @@ public class If<T> {
         return new If<>(value, ifFn);
     }
 
+    public static <T> If<T> of(Function<T, Boolean> ifFn) {
+        return of(null, ifFn);
+    }
+
     public <U> Then<T, U> thn(Function<T, U> thnFn) {
         return Then.of(thnFn, this);
     }
