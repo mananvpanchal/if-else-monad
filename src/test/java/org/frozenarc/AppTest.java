@@ -25,13 +25,16 @@ public class AppTest
                 .els(str -> str + "hi")
                 .done().equals("Ho, hi"));
 
-        Assert.assertTrue(If.of("Ho, ", str -> str.equals("Ho"))
-                .thn(If.<String>of(str2 -> str2.equals(""))
+        Assert.assertTrue(If.of("Ho", str -> str.equals("Ho"))
+                .thn(If.<String>of(str2 -> str2.equals("Ho"))
+                        .thn(str2 -> str2 + ", He")
+                        .els(str2 -> str2 + ", Hu")
+                        .delay())
+                .els(If.<String>of(str2 -> str2.equals("Ho, "))
                         .thn(str2 -> str2 + "He")
                         .els(str2 -> str2 + "Hu")
                         .delay())
-                .els(str -> str + "hi")
-                .done().equals("Ho, hi"));
+                .done().equals("Ho, He"));
 
     }
 

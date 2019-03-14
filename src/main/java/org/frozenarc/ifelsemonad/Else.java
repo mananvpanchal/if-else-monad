@@ -21,11 +21,11 @@ public class Else<T, U> {
     }
 
 
-    Function<T, U> getElsFn() {
+    private Function<T, U> getElsFn() {
         return elsFn;
     }
 
-    Then<T, U> getThn() {
+    private Then<T, U> getThn() {
         return thn;
     }
 
