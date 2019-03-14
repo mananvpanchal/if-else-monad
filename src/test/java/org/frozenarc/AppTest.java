@@ -17,7 +17,8 @@ public class AppTest
     @Test
     public void test() {
 
-        Assert.assertTrue(If.of("Ho, ", str -> str.equals("Ho"))
+        Assert.assertTrue(
+                If.of("Ho, ", str -> str.equals("Ho"))
                 .thn(str -> If.of(str, str2 -> str2.equals(""))
                         .thn(str2 -> str2 + "He")
                         .els(str2 -> str2 + "Hu")
@@ -26,13 +27,13 @@ public class AppTest
                 .done().equals("Ho, hi"));
 
         Assert.assertTrue(If.of("Ho", str -> str.equals("Ho"))
-                .thn(If.<String>of(str2 -> str2.equals("Ho"))
-                        .thn(str2 -> str2 + ", He")
-                        .els(str2 -> str2 + ", Hu")
+                .thn(If.<String>of(str -> str.equals("Ho"))
+                        .thn(str -> str + ", He")
+                        .els(str -> str + ", Hu")
                         .delay())
-                .els(If.<String>of(str2 -> str2.equals("Ho, "))
-                        .thn(str2 -> str2 + "He")
-                        .els(str2 -> str2 + "Hu")
+                .els(If.<String>of(str -> str.equals("Ho, "))
+                        .thn(str -> str + "He")
+                        .els(str -> str + "Hu")
                         .delay())
                 .done().equals("Ho, He"));
 
