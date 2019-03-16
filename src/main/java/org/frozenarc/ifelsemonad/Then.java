@@ -1,20 +1,9 @@
 package org.frozenarc.ifelsemonad;
 
-public class Then<T, U> implements Do<T, U> {
+import java.util.function.Function;
 
-    private Do<T, U> thnDo;
+public interface Then<T, U> {
 
+    Else<T, U> thn(Do<T, U> thnFn);
 
-    public Then(Do<T, U> thnDo) {
-        this.thnDo = thnDo;
-    }
-
-    public Else<T, U> els(Do<T, U> elsDo) {
-        return new Else<>(elsDo);
-    }
-
-    @Override
-    public U work(T value) {
-        return thnDo.work(value);
-    }
 }
