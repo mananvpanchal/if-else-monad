@@ -9,33 +9,14 @@ import org.junit.Test;
 /**
  * Unit test for simple App.
  */
-public class AppTest 
-{
+public class AppTest {
     /**
      * Rigorous Test :-)
      */
     @Test
     public void test() {
 
-        Assert.assertTrue(
-                If.of("Ho, ", str -> str.equals("Ho"))
-                .thn(str -> If.of(str, str2 -> str2.equals(""))
-                        .thn(str2 -> str2 + "He")
-                        .els(str2 -> str2 + "Hu")
-                        .done())
-                .els(str -> str + "hi")
-                .done().equals("Ho, hi"));
-
-        Assert.assertTrue(If.of("Ho", str -> str.equals("Ho"))
-                .thn(If.<String>of(str -> str.equals("Ho"))
-                        .thn(str -> str + ", He")
-                        .els(str -> str + ", Hu")
-                        .delay())
-                .els(If.<String>of(str -> str.equals("Ho, "))
-                        .thn(str -> str + "He")
-                        .els(str -> str + "Hu")
-                        .delay())
-                .done().equals("Ho, He"));
+        If.of("", s -> true).thn(s -> s).els(If.of("", s -> false).thn(s -> s));
 
     }
 
