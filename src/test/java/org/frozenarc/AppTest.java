@@ -26,6 +26,14 @@ public class AppTest
                 .els(str -> str + "hi")
                 .done().equals("Ho, hi"));
 
+        Assert.assertTrue(
+                If.of("Ho, ", str -> str.equals("Ho"))
+                        .thn(str -> If.of(str, str2 -> str2.equals(""))
+                                .thn(str2 -> str2 + "He")
+                                .done("Hi"))
+                        .els(str -> str + "hi")
+                        .done().equals("Ho, hi"));
+
         Assert.assertTrue(If.of("Ho", str -> str.equals("Ho"))
                 .thn(If.<String>of(str -> str.equals("Ho"))
                         .thn(str -> str + ", He")
@@ -33,8 +41,7 @@ public class AppTest
                         .delay())
                 .els(If.<String>of(str -> str.equals("Ho, "))
                         .thn(str -> str + "He")
-                        .els(str -> str + "Hu")
-                        .delay())
+                        .delay("Hi"))
                 .done().equals("Ho, He"));
 
     }

@@ -31,4 +31,16 @@ public class Then<T, U> {
     If<T> getIf() {
         return iff;
     }
+
+    public U done(U value) {
+        return getIf().getIfFn().apply(getIf().getValue())
+                ? getThnFn().apply(getIf().getValue())
+                : value;
+    }
+
+    public Function<T, U> delay(U value) {
+        return val -> getIf().getIfFn().apply(val)
+                ? getThnFn().apply(val)
+                : value;
+    }
 }
